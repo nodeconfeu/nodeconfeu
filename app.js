@@ -1,29 +1,17 @@
- var couchapp = require('couchapp')
-  , path = require('path')
+var path = require('path')
+  , http = require('http')
+  , url  = require('url')
+  , stat = require('node-static')
   ;
 
-ddoc = { _id:'_design/app'
-  , rewrites : [
-        {from:"/", to:'index.html'}
-      , {from:"/api", to: '../../'}
-      , {from:"/api/*", to: '../../*'}
-      , {from:"/*", to:'*'}
-      
-    ]
-  }
-  
-ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {   
-  if (newDoc._deleted === true && userCtx.roles.indexOf('_admin') === -1) {     
-    throw "Only admin can delete documents on this database."   
-  } 
-}
+var file = new(stat.Server)('.');
 
-ddoc.views = {}
-ddoc.views.proposalsByTimestamp = {}
-ddoc.views.proposalsByTimestamp.map = function (doc) {
-  if (doc.type === 'proposal' && doc.created) emit(doc.created, 1);
-}
+http.createServer(function (request, response) {
+  console.log({method: request.method, url: request.url});
+  request.addListener('end', function () {
+    file.serve(request, response);
+  });
+}).listen(8081);
 
-couchapp.loadAttachments(ddoc, path.join(__dirname, 'attachments'))
 
-module.exports = ddoc
+console.log('{"app": "Listening on 8081"}');

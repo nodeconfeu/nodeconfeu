@@ -1,0 +1,16 @@
+{
+  "name": "nodeconfeu",
+  "subdomain": "nodeconfeu",
+  "description": "nodeconfeu site",
+  "version": "0.0.2-2",
+  "author": "Mikeal Rogers",
+  "dependencies": {
+    "node-static": "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": [
+    "node >= 0.8.x"
+  ]
+}
