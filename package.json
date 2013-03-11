@@ -2,11 +2,12 @@
   "name": "nodeconfeu",
   "subdomain": "nodeconfeu",
   "description": "nodeconfeu site",
-  "version": "0.0.2-2",
+  "version": "0.0.2-3",
   "author": "Mikeal Rogers",
   "dependencies": {
     "node-static": "*"
   },
+  "domains": ["www.nodeconf.eu", "nodeconf.eu"],
   "scripts": {
     "start": "node app.js"
   },
